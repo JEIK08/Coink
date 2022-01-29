@@ -5,7 +5,8 @@ import { AuthPage } from './auth.page';
 
 const routes: Routes = [
 	{ path: '', component: AuthPage },
-	{ path: '**', redirectTo: '', pathMatch: 'full' }
+	{ path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule) },
+	{ path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

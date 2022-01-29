@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref=".." icon="chevron-back" color="primary"></ion-back-button>
+		</ion-buttons>
+		<ion-title color="secondary">NÚMERO CELULAR</ion-title>
+	</ion-toolbar>
+	<ion-toolbar>
+		<ion-title class="ion-text-center">
+			<div class="register-steps">
+				<ion-radio-group name="step1" [value]="true" (ionChange)="prevent($event)">
+					<ion-radio [value]="true"></ion-radio>
+				</ion-radio-group>
+				<hr class="separator">
+				<ion-radio-group [value]="false" (ionChange)="prevent($event)">
+					<ion-radio [value]="true"></ion-radio>
+				</ion-radio-group>
+				<hr class="separator">
+				<ion-radio-group [value]="false" (ionChange)="prevent($event)">
+					<ion-radio [value]="true"></ion-radio>
+				</ion-radio-group>
+			</div>
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+</ion-content>
