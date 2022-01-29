@@ -1,0 +1,14 @@
+ion-grid {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	> ion-row:first-child {
+		flex-grow: 1;
+	}
+}
+
+.logo-text {
+	font-size: 18px;
+	font-weight: bold;
+}
