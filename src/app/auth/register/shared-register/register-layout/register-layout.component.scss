@@ -1,0 +1,33 @@
+:host {
+	display: grid;
+	grid-template-areas: 'icon title' 'icon description' 'separator separator' 'content content';
+	grid-template-columns: auto 1fr;
+	grid-template-rows: repeat(3, auto) 1fr;
+	gap: 0px 24px;
+	height: 100%;
+}
+
+img {
+	grid-area: icon;
+	width: 64px;
+}
+
+.register-title {
+	grid-area: title;
+	margin-top: 0px;
+}
+
+.register-description {
+	grid-area: description;
+}
+
+.green-separator {
+	grid-area: separator;
+	border: 1px solid var(--ion-color-primary);
+	background-color: var(--ion-color-primary);
+	margin: 24px 0px;
+}
+
+.register-content {
+	grid-area: content;
+}

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthPage } from './auth.page';
+import { StepNumberPage } from './step-number.page';
 
 const routes: Routes = [
-	{ path: '', component: AuthPage },
-	{ path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule) },
+	{ path: '', component: StepNumberPage },
 	{ path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
@@ -13,4 +12,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class AuthPageRoutingModule { }
+export class StepNumberPageRoutingModule { }

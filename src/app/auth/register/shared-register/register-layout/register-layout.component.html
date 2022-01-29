@@ -1,0 +1,9 @@
+<img [src]="iconPath" alt="icon" />
+<ion-text color="secondary" class="register-title text-title" *ngIf="title" >{{ title }}</ion-text>
+<ion-text color="medium" class="register-description">
+	<ng-template [ngTemplateOutlet]="description"></ng-template>
+</ion-text>
+<div class="green-separator"></div>
+<div class="register-content">
+	<ng-content></ng-content>
+</div>
