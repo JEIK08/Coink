@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 
 import { DocumentType } from '../interfaces/document-type';
+import { Gender } from '../interfaces/gender';
 
 @Injectable({
 	providedIn: 'root'
@@ -64,6 +65,21 @@ export class RegisterService {
 			}, 2000);
 		});
 		// return this.http.get('/signup/documentTypes');
+	}
+
+	getGenders() {
+		return new Observable<Gender[]>(observer => {
+			setTimeout(() => {
+				observer.next(
+					[
+						{ id: 1, name: "Masculino", description: "Género Masculino" },
+						{ id: 2, name: "Femenino", description: "Género Femenino" }
+					]
+				);
+				observer.complete();
+			}, 2000);
+		});
+		// return this.http.get('/signup/genders');
 	}
 
 }

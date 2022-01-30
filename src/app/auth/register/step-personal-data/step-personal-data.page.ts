@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 
 import { DocumentType } from '../interfaces/document-type';
+import { Gender } from '../interfaces/gender';
 
 @Component({
 	selector: 'app-step-personal-data',
@@ -14,6 +15,7 @@ export class StepPersonalDataPage {
 
 	public form: FormGroup;
 	public documentTypes: DocumentType[];
+	public genders: Gender[];
 
 	constructor(
 		private registerService: RegisterService,
@@ -22,11 +24,15 @@ export class StepPersonalDataPage {
 		this.registerService.getDocumentTypes().subscribe(documenTypes => {
 			this.documentTypes = documenTypes;
 		});
+		this.registerService.getGenders().subscribe(genders => {
+			this.genders = genders;
+		});
 		this.form = this.formBuilder.group({
 			documentType: [null, Validators.required],
 			documentNumber: [null, Validators.required],
 			documentExpedition: [null, Validators.required],
-			birthDate: [null, Validators.required]
+			birthDate: [null, Validators.required],
+			gender: [null, Validators.required]
 		});
 	}
 

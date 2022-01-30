@@ -33,6 +33,17 @@
 					<ion-label position="floating">Fecha de nacimiento</ion-label>
 					<ion-input readonly type="text" [value]="form.controls.birthDate.value"></ion-input>
 				</ion-item>
+				<ion-item>
+					<ion-label position="floating">Género</ion-label>
+					<ion-select interface="popover" formControlName="gender">
+						<ion-select-option *ngIf="!genders" disabled>
+							Cargando...
+						</ion-select-option>
+						<ion-select-option *ngFor="let gender of genders" [value]="gender.name">
+							{{ gender.name }}
+						</ion-select-option>
+					</ion-select>
+				</ion-item>
 			</ion-list>
 		</form>
 	</app-register-layout>
