@@ -10,16 +10,16 @@
 	<ion-toolbar>
 		<ion-title class="ion-text-center">
 			<div class="register-steps">
-				<ion-radio-group name="step1" [value]="true" (ionChange)="prevent($event)">
-					<ion-radio [value]="true"></ion-radio>
+				<ion-radio-group name="step1" [value]="true">
+					<ion-radio [value]="true" disabled></ion-radio>
 				</ion-radio-group>
 				<hr class="separator">
-				<ion-radio-group [value]="false" (ionChange)="prevent($event)">
-					<ion-radio [value]="true"></ion-radio>
+				<ion-radio-group [value]="step2">
+					<ion-radio [value]="true" disabled></ion-radio>
 				</ion-radio-group>
 				<hr class="separator">
-				<ion-radio-group [value]="false" (ionChange)="prevent($event)">
-					<ion-radio [value]="true"></ion-radio>
+				<ion-radio-group [value]="false">
+					<ion-radio [value]="true" disabled></ion-radio>
 				</ion-radio-group>
 			</div>
 		</ion-title>

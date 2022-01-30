@@ -24,8 +24,14 @@ export class StepPersonalDataPage {
 		});
 		this.form = this.formBuilder.group({
 			documentType: [null, Validators.required],
-			documentNumber: [null, Validators.required]
+			documentNumber: [null, Validators.required],
+			documentExpedition: [null, Validators.required],
+			birthDate: [null, Validators.required]
 		});
+	}
+
+	selectDate({ detail: { value } }: any, field: string) {
+		this.form.get(field).setValue(value.substring(0, 10));
 	}
 
 }

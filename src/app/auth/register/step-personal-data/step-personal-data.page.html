@@ -11,13 +11,8 @@
 			<ion-text class="text-title">Documento de identidad</ion-text>
 			<ion-list>
 				<ion-item>
-					<ion-label>Tipo de documento</ion-label>
-					<ion-select
-					interface="popover"
-					okText="Seleccionar"
-					cancelText="Cancelar"
-					[selectedText]="form.controls.documentType.value"
-					formControlName="documentType">
+					<ion-label position="floating">Tipo de documento</ion-label>
+					<ion-select interface="popover" formControlName="documentType">
 						<ion-select-option *ngIf="!documentTypes" disabled>
 							Cargando...
 						</ion-select-option>
@@ -30,7 +25,55 @@
 					<ion-label position="floating">Número de documento</ion-label>
 					<ion-input type="text" formControlName="documentNumber"></ion-input>
 				</ion-item>
+				<ion-item detail class="ion-align-items-center" id="expedition-modal">
+					<ion-label position="floating">Fecha de expedición del documento</ion-label>
+					<ion-input readonly type="text" [value]="form.controls.documentExpedition.value"></ion-input>
+				</ion-item>
+				<ion-item detail class="ion-align-items-center" id="birth-modal">
+					<ion-label position="floating">Fecha de nacimiento</ion-label>
+					<ion-input readonly type="text" [value]="form.controls.birthDate.value"></ion-input>
+				</ion-item>
 			</ion-list>
 		</form>
 	</app-register-layout>
 </ion-content>
+
+<ion-modal trigger="expedition-modal">
+	<ng-template>
+		<ng-container *ngTemplateOutlet="datePickerTemplate; context: {
+			$implicit: 'documentExpedition',
+			modalTitle: 'Fecha de expedición del documento'
+		}">
+		</ng-container>
+	</ng-template>
+</ion-modal>
+
+<ion-modal trigger="birth-modal">
+	<ng-template>
+		<ng-container *ngTemplateOutlet="datePickerTemplate; context: {
+			$implicit: 'birthDate',
+			modalTitle: 'Fecha de nacimiento'
+		}">
+		</ng-container>
+	</ng-template>
+</ion-modal>
+
+<ng-template #datePickerTemplate let-field let-modalTitle="modalTitle">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title>
+				{{ modalTitle }}
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-datetime
+		showDefaultButtons
+		presentation="date"
+		doneText="Seleccionar"
+		cancelText="Cancelar"
+		[value]="form.controls[field].value"
+		(ionChange)="selectDate($event, field)">
+		</ion-datetime>
+	</ion-content>
+</ng-template>

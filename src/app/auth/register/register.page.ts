@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+
+import { RegisterService } from './services/register.service';
 
 @Component({
 	selector: 'app-register',
@@ -8,12 +10,16 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage {
 
-	constructor(
-		private router: Router
-	) { }
+	public step2: boolean;
 
-	prevent(event: Event) {
-		event.stopImmediatePropagation();
+	constructor(
+		private registerService: RegisterService,
+		private router: Router
+	) {
+		this.router.events.subscribe(event => {
+			if (!(event instanceof NavigationEnd)) return;
+			this.step2 = this.registerService.isPhoneVerified();
+		});
 	}
 
 	back() {
