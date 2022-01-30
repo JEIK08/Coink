@@ -26,7 +26,8 @@ export class StepCodePage {
 		private loadingController: LoadingController
 	) {
 		this.phoneNumber = this.registerService.getPhoneNumner();
-		this.codeControl = this.formBuilder.control('1234', [
+		// 0000
+		this.codeControl = this.formBuilder.control('', [
 			Validators.required,
 			Validators.minLength(4)
 		]);
@@ -41,7 +42,8 @@ export class StepCodePage {
 
 	sendCode() {
 		if (this.codeControl.value == '0000') {
-
+			this.registerService.setPhoneVerified(true);
+			this.router.navigate(['..', 'personal-data'], { relativeTo: this.route });
 		} else {
 			this.alertController.create({
 				header: 'CÓDIGO INCORRECTO',

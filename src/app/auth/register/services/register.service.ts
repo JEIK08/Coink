@@ -10,6 +10,7 @@ import { LoadingController } from '@ionic/angular';
 export class RegisterService {
 
 	private phoneNumber: string;
+	private phoneVerified: boolean;
 
 	constructor(private http: HttpClient) { }
 
@@ -37,6 +38,14 @@ export class RegisterService {
 				// }));
 			});
 		});
+	}
+
+	isPhoneVerified() {
+		return this.phoneVerified;
+	}
+
+	setPhoneVerified(phoneVerified: boolean) {
+		this.phoneVerified = phoneVerified;
 	}
 
 }
