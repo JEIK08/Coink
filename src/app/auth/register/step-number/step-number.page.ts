@@ -37,18 +37,10 @@ export class StepNumberPage {
 	}
 
 	getVerificationCode() {
-		let modal: HTMLIonLoadingElement;
-		this.loadingController.create().then(modalRef => {
-			modal = modalRef;
-			modal.present();
-			setTimeout(() => {
-				modal.dismiss().then();
-				this.router.navigate(['..', 'verification-code'], { relativeTo: this.route });
-			}, 300);
+		this.registerService.setPhoneNumber(this.phoneNumber.value);
+		this.registerService.sendVerificationCode(this.loadingController).then(() => {
+			this.router.navigate(['..', 'verification-code'], { relativeTo: this.route });
 		});
-		// this.registerService.getVerificationCode(this.phoneNumber.value).subscribe(() => {
-
-		// });
 	}
 
 }

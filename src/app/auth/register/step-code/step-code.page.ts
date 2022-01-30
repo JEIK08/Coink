@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 import { RegisterService } from '../services/register.service';
 
@@ -22,7 +22,8 @@ export class StepCodePage {
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private route: ActivatedRoute,
-		private alertController: AlertController
+		private alertController: AlertController,
+		private loadingController: LoadingController
 	) {
 		this.phoneNumber = this.registerService.getPhoneNumner();
 		this.codeControl = this.formBuilder.control('1234', [
@@ -47,18 +48,11 @@ export class StepCodePage {
 				message: 'El código que ingresaste es incorrecto, enviaremos un nuevo código a tu correo electrónico.',
 				cssClass: 'code-modal',
 				buttons: [
-					{
-						text: 'Close',
-						handler: () => {
-							console.log('Confirm Cancel');
-						}
-					},
+					{ text: 'Cancelar' },
 					{
 						text: 'Reenviar código',
 						cssClass: 'warning',
-						handler: () => {
-							console.log('Confirm resend');
-						}
+						handler: () => this.registerService.sendVerificationCode(this.loadingController).then()
 					},
 				]
 			}).then(alert => alert.present());
