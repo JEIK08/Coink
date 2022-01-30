@@ -30,7 +30,7 @@ export class StepNumberPage {
 	}
 
 	getVerificationCode() {
-		this.registerService.getVerificationCode();
+		this.registerService.getVerificationCode(this.phoneNumber.value);
 	}
 
 }

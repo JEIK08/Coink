@@ -8,11 +8,12 @@ export class RegisterService {
 
 	constructor(private http: HttpClient) { }
 
-	getVerificationCode() {
-		this.http.post('/signup/sendSmsVerificationNumber', {
-			payload: "wO2uQHZuK0vC76DGcrsrc/7gcNufuWM98C/DdaYGm7mY6tclOJXaLhBc560ohkSDu43Rbpff8LM="
-		}).subscribe((data) => {
-			console.log(data);
+	getVerificationCode(phone_number: string) {
+		this.http.post(
+			'/signup/sendSmsVerificationNumber',
+			{ phone_number, log_signup_id: '' }
+		).subscribe((data) => {
+			console.log('Service', data);
 		});
 	}
 
