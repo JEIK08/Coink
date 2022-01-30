@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-register',
@@ -7,10 +8,20 @@ import { Component } from '@angular/core';
 })
 export class RegisterPage {
 
-	constructor() { }
+	constructor(
+		private router: Router
+	) { }
 
 	prevent(event: Event) {
 		event.stopImmediatePropagation();
+	}
+
+	back() {
+		if (history.state.navigationId == 1) {
+			this.router.navigate(['autn']);
+		} else {
+			history.back();
+		}
 	}
 
 }

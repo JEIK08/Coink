@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { LoadingController } from '@ionic/angular';
 
 import { RegisterService } from '../services/register.service';
 
@@ -15,8 +18,12 @@ export class StepNumberPage {
 
 	constructor(
 		private registerService: RegisterService,
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private route: ActivatedRoute,
+		private loadingController: LoadingController
 	) {
+		// 573155555555
 		this.phoneNumber = this.formBuilder.control('', [
 			Validators.required,
 			Validators.minLength(10)
@@ -30,7 +37,18 @@ export class StepNumberPage {
 	}
 
 	getVerificationCode() {
-		this.registerService.getVerificationCode(this.phoneNumber.value);
+		let modal: HTMLIonLoadingElement;
+		this.loadingController.create().then(modalRef => {
+			modal = modalRef;
+			modal.present();
+			setTimeout(() => {
+				modal.dismiss().then();
+				this.router.navigate(['..', 'verification-code'], { relativeTo: this.route });
+			}, 300);
+		});
+		// this.registerService.getVerificationCode(this.phoneNumber.value).subscribe(() => {
+
+		// });
 	}
 
 }

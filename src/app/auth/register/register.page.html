@@ -1,7 +1,9 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button defaultHref=".." icon="chevron-back" color="primary"></ion-back-button>
+			<ion-button (click)="back()">
+				<ion-icon slot="icon-only" name="chevron-back" color="primary"></ion-icon>
+			</ion-button>
 		</ion-buttons>
 		<ion-title color="secondary">NÚMERO CELULAR</ion-title>
 	</ion-toolbar>

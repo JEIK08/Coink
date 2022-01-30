@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class RegisterService {
 
+	private phoneNumber: string;
+
 	constructor(private http: HttpClient) { }
 
 	getVerificationCode(phone_number: string) {
-		this.http.post(
+		return this.http.post(
 			'/signup/sendSmsVerificationNumber',
 			{ phone_number, log_signup_id: '' }
-		).subscribe((data) => {
-			console.log('Service', data);
-		});
+		).pipe(tap(() => {
+			this.phoneNumber = phone_number;
+		}));
+	}
+
+	getPhoneNumner() {
+		return this.phoneNumber;
 	}
 
 }

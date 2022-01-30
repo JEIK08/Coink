@@ -1,0 +1,19 @@
+<ion-content>
+	<app-register-layout
+	iconPath="assets/icons/oink.svg"
+	[description]="codeDescription">
+		<ng-template #codeDescription>
+			Digíta el código que recibiste vía <strong>mensaje de texto</strong> al {{ phoneNumber }}
+		</ng-template>
+
+		<ion-input
+		readonly
+		type="text"
+		class="input-pad-number"
+		placeholder="X X X X"
+		[value]="displayCode">
+		</ion-input>
+
+		<app-number-pad [formControl]="codeControl" (onComplete)="sendCode()"></app-number-pad>
+	</app-register-layout>
+</ion-content>
