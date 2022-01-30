@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 // import { tap } from 'rxjs/operators';
 
 import { LoadingController } from '@ionic/angular';
+
+import { DocumentType } from '../interfaces/document-type';
 
 @Injectable({
 	providedIn: 'root'
@@ -46,6 +49,21 @@ export class RegisterService {
 
 	setPhoneVerified(phoneVerified: boolean) {
 		this.phoneVerified = phoneVerified;
+	}
+
+	getDocumentTypes() {
+		return new Observable<DocumentType[]>(observer => {
+			setTimeout(() => {
+				observer.next(
+					[
+						{ id: 1, notation: 'CC' as any, description: 'Cédula de Ciudadanía' },
+						{ id: 2, notation: 'TI' as any, description: 'Tarjeta de Identidad' }
+					]
+				);
+				observer.complete();
+			}, 2000);
+		});
+		// return this.http.get('/signup/documentTypes');
 	}
 
 }

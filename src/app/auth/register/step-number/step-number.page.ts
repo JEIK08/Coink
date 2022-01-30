@@ -23,12 +23,11 @@ export class StepNumberPage {
 		private route: ActivatedRoute,
 		private loadingController: LoadingController
 	) {
-		// 573155555555
+		/// 573155555555
 		this.phoneNumber = this.formBuilder.control('', [
 			Validators.required,
 			Validators.minLength(10)
 		]);
-
 		this.phoneNumber.valueChanges.subscribe((newPhoneNumber: string) => {
 			this.displayPhoneNumber = newPhoneNumber.substring(0, 3);
 			if (newPhoneNumber.length <= 3) return;

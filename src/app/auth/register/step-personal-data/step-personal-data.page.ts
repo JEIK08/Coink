@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { RegisterService } from '../services/register.service';
+
+import { DocumentType } from '../interfaces/document-type';
 
 @Component({
 	selector: 'app-step-personal-data',
@@ -7,6 +12,20 @@ import { Component } from '@angular/core';
 })
 export class StepPersonalDataPage {
 
-	constructor() { }
+	public form: FormGroup;
+	public documentTypes: DocumentType[];
+
+	constructor(
+		private registerService: RegisterService,
+		private formBuilder: FormBuilder
+	) {
+		this.registerService.getDocumentTypes().subscribe(documenTypes => {
+			this.documentTypes = documenTypes;
+		});
+		this.form = this.formBuilder.group({
+			documentType: [null, Validators.required],
+			documentNumber: [null, Validators.required]
+		});
+	}
 
 }
