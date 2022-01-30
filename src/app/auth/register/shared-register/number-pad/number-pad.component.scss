@@ -1,0 +1,33 @@
+:host {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, auto);
+	justify-items: center;
+}
+
+ion-button {
+	--background: transparent;
+	--box-shadow: none;
+	--padding-bottom: 0px;
+	--padding-end: 0px;
+	--padding-start: 0px;
+	--padding-to: 0px;
+	--border-radius: 50%;
+	height: 54px;
+	width: 54px;
+	font-size: 32px;
+}
+
+.backspace {
+	font-size: 24px;
+}
+
+.check {
+	--background: var(--ion-color-primary);
+	--color: white;
+	font-size: 16px;
+
+	&[disabled] {
+		--background: #d3d3d3;
+	}
+}

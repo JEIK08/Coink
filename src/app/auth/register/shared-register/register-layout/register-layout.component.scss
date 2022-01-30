@@ -1,10 +1,26 @@
 :host {
 	display: grid;
-	grid-template-areas: 'icon title' 'icon description' 'separator separator' 'content content';
+	grid-template-areas:
+		'icon title'
+		'icon description'
+		'separator separator'
+		'content content';
 	grid-template-columns: auto 1fr;
 	grid-template-rows: repeat(3, auto) 1fr;
 	gap: 0px 24px;
 	height: 100%;
+
+	&.without-title {
+		grid-template-areas:
+			'icon description'
+			'icon description'
+			'separator separator'
+			'content content';
+
+		.register-description {
+			align-self: center;
+		}
+	}
 }
 
 img {
@@ -15,6 +31,7 @@ img {
 .register-title {
 	grid-area: title;
 	margin-top: 0px;
+	margin-bottom: 12px;
 }
 
 .register-description {

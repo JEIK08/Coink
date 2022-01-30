@@ -1,12 +1,11 @@
 <ion-content>
 	<app-register-layout
-	iconPath="assets/icons/coink-logo.svg"
-	title="Title"
+	iconPath="assets/icons/oink.svg"
 	[description]="descriptionTemplate">
 		<ng-template #descriptionTemplate>
-			Hello world
+			Para comenzar, por favor ingresa <strong>tu número celular.</strong>
 		</ng-template>
 
-		This is the content
+		<app-number-pad></app-number-pad>
 	</app-register-layout>
 </ion-content>
