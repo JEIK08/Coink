@@ -27,6 +27,22 @@ export class RegisterService {
 	}
 
 	sendVerificationCode(loadingController: LoadingController) {
+		// const url = environment.API_URL + request.url;
+		// const params = request.params.append('apiKey', environment.API_KEY);
+		// if (request.body) {
+		// 	request = request.clone({
+		// 		url,
+		// 		params,
+		// 		body: { payload: this.cryptoService.encrypt(request.body) }
+		// 	});
+		// } else {
+		// 	request = request.clone({ url, params });
+		// }
+		// .pipe(map(response => {
+		// 	return response.type == HttpEventType.Response
+		// 		? response.clone({ body: this.cryptoService.decrypt(response.body.payload) })
+		// 		: response;
+		// }));
 		return new Promise<void>(resolve => {
 			loadingController.create().then(modal => {
 				modal.present();

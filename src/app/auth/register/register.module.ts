@@ -4,8 +4,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { StepCodeGuardService } from './step-code/services/step-code-guard.service';
-import { RegisterService } from './services/register.service';
 import { StepPersonalDataGuardService } from './step-personal-data/services/step-personal-data-guard.service';
+import { RegisterService } from './services/register.service';
+import { CryptoService } from './services/crypto.service';
 
 import { RegisterPage } from './register.page';
 
@@ -17,7 +18,8 @@ import { RegisterPage } from './register.page';
 	providers: [
 		StepCodeGuardService,
 		StepPersonalDataGuardService,
-		RegisterService
+		RegisterService,
+		CryptoService
 	],
 	declarations: [
 		RegisterPage
