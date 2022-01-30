@@ -14,6 +14,6 @@
 		[value]="displayPhoneNumber">
 		</ion-input>
 
-		<app-number-pad [formControl]="phoneNumber"></app-number-pad>
+		<app-number-pad [formControl]="phoneNumber" (onComplete)="getVerificationCode()"></app-number-pad>
 	</app-register-layout>
 </ion-content>

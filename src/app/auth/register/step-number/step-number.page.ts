@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
+import { RegisterService } from '../services/register.service';
+
 @Component({
 	selector: 'app-step-number',
 	templateUrl: './step-number.page.html',
@@ -11,7 +13,10 @@ export class StepNumberPage {
 	public phoneNumber: FormControl;
 	public displayPhoneNumber: string;
 
-	constructor(private formBuilder: FormBuilder) {
+	constructor(
+		private registerService: RegisterService,
+		private formBuilder: FormBuilder
+	) {
 		this.phoneNumber = this.formBuilder.control('', [
 			Validators.required,
 			Validators.minLength(10)
@@ -22,6 +27,10 @@ export class StepNumberPage {
 			if (newPhoneNumber.length <= 3) return;
 			this.displayPhoneNumber += ' ' + newPhoneNumber.substring(3);
 		});
+	}
+
+	getVerificationCode() {
+		this.registerService.getVerificationCode();
 	}
 
 }
