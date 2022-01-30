@@ -17,6 +17,9 @@ export class StepPersonalDataPage {
 	public documentTypes: DocumentType[];
 	public genders: Gender[];
 
+	public showPin: boolean;
+	public showConfirmPin: boolean;
+
 	constructor(
 		private registerService: RegisterService,
 		private formBuilder: FormBuilder
@@ -32,12 +35,33 @@ export class StepPersonalDataPage {
 			documentNumber: [null, Validators.required],
 			documentExpedition: [null, Validators.required],
 			birthDate: [null, Validators.required],
-			gender: [null, Validators.required]
+			gender: [null, Validators.required],
+			email: [null, [Validators.required, Validators.email]],
+			emailConfirm: [null],
+			pin: [null, [Validators.required, Validators.minLength(8)]],
+			confirmPin: [null, [Validators.required, Validators.minLength(8)]]
+		});
+
+		this.form.get('emailConfirm').setValidators([
+			Validators.required,
+			Validators.email,
+			({ value }) => value == this.form.get('email').value ? null : { notEquals: true }
+		]);
+
+		this.form.get('email').valueChanges.subscribe(() => {
+			this.form.get('emailConfirm').updateValueAndValidity();
 		});
 	}
 
 	selectDate({ detail: { value } }: any, field: string) {
 		this.form.get(field).setValue(value.substring(0, 10));
+	}
+
+	onSubmit() {
+		if (this.form.invalid) {
+			this.form.markAllAsTouched();
+			return;
+		}
 	}
 
 }

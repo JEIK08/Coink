@@ -7,8 +7,8 @@
 			Ahora necesitamos saber algunos datos tuyos
 		</ng-template>
 
-		<form [formGroup]="form">
-			<ion-text class="text-title">Documento de identidad</ion-text>
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+			<p class="text-title ion-no-margin">Documento de identidad</p>
 			<ion-list>
 				<ion-item>
 					<ion-label position="floating">Tipo de documento</ion-label>
@@ -45,6 +45,53 @@
 					</ion-select>
 				</ion-item>
 			</ion-list>
+
+			<p class="text-title ion-margin-top ion-no-margin">Configura tu cuenta</p>
+			<ion-list>
+				<ion-item>
+					<ion-label position="floating">Correo electrónico</ion-label>
+					<ion-input type="email" formControlName="email"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-label position="floating">Confirmar correo electrónico</ion-label>
+					<ion-input type="email" formControlName="emailConfirm"></ion-input>
+				</ion-item>
+				<ion-item class="ion-align-items-center">
+					<ion-label position="floating">PIN de seguridad</ion-label>
+					<ion-input
+					[type]="showPin ? 'text' : 'password'"
+					formControlName="pin">
+					</ion-input>
+					<ion-icon
+					slot="end"
+					[name]="showPin ? 'eye-off' : 'eye'"
+					(click)="showPin = !showPin">
+					</ion-icon>
+				</ion-item>
+				<ion-item class="ion-align-items-center">
+					<ion-label position="floating">Confirmar PIN de seguridad</ion-label>
+					<ion-input
+					[type]="showConfirmPin ? 'text' : 'password'"
+					formControlName="confirmPin">
+					</ion-input>
+					<ion-icon
+					slot="end"
+					[name]="showConfirmPin ? 'eye-off' : 'eye'"
+					(click)="showConfirmPin = !showConfirmPin">
+					</ion-icon>
+				</ion-item>
+			</ion-list>
+
+			<ion-button
+			strong
+			class="ion-margin-bottom"
+			type="submit"
+			size="large"
+			expand="block"
+			shape="round"
+			[disabled]="form.invalid">
+				SIGUIENTE
+			</ion-button>
 		</form>
 	</app-register-layout>
 </ion-content>
