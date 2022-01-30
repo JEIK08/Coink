@@ -6,6 +6,14 @@
 			Para comenzar, por favor ingresa <strong>tu número celular.</strong>
 		</ng-template>
 
-		<app-number-pad></app-number-pad>
+		<ion-input
+		readonly
+		type="text"
+		class="input-pad-number"
+		placeholder="(XXX - XXXXXXX)"
+		[value]="displayPhoneNumber">
+		</ion-input>
+
+		<app-number-pad [formControl]="phoneNumber"></app-number-pad>
 	</app-register-layout>
 </ion-content>
