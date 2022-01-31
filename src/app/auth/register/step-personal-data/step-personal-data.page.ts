@@ -39,7 +39,7 @@ export class StepPersonalDataPage {
 			email: [null, [Validators.required, Validators.email]],
 			emailConfirm: [null],
 			pin: [null, [Validators.required, Validators.minLength(8)]],
-			confirmPin: [null, [Validators.required, Validators.minLength(8)]]
+			confirmPin: [null]
 		});
 
 		this.form.get('emailConfirm').setValidators([
@@ -47,9 +47,17 @@ export class StepPersonalDataPage {
 			Validators.email,
 			({ value }) => value == this.form.get('email').value ? null : { notEquals: true }
 		]);
+		this.form.get('confirmPin').setValidators([
+			Validators.required,
+			Validators.minLength(8),
+			({ value }) => value == this.form.get('pin').value ? null : { notEquals: true }
+		]);
 
 		this.form.get('email').valueChanges.subscribe(() => {
 			this.form.get('emailConfirm').updateValueAndValidity();
+		});
+		this.form.get('pin').valueChanges.subscribe(() => {
+			this.form.get('confirmPin').updateValueAndValidity();
 		});
 	}
 
@@ -62,6 +70,7 @@ export class StepPersonalDataPage {
 			this.form.markAllAsTouched();
 			return;
 		}
+		this.registerService.setPersonalInformation(this.form.value);
 	}
 
 }

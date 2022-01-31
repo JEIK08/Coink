@@ -21,18 +21,46 @@
 						</ion-select-option>
 					</ion-select>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.documentType.invalid && form.controls.documentType.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Seleccione un tipo de documento</ion-label>
+				</ion-item>
+
 				<ion-item>
 					<ion-label position="floating">Número de documento</ion-label>
 					<ion-input type="text" formControlName="documentNumber"></ion-input>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.documentNumber.invalid && form.controls.documentNumber.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Ingrese un número de documento</ion-label>
+				</ion-item>
+
 				<ion-item detail class="ion-align-items-center" id="expedition-modal">
 					<ion-label position="floating">Fecha de expedición del documento</ion-label>
 					<ion-input readonly type="text" [value]="form.controls.documentExpedition.value"></ion-input>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.documentExpedition.invalid && form.controls.documentExpedition.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Seleccione una fecha</ion-label>
+				</ion-item>
+
 				<ion-item detail class="ion-align-items-center" id="birth-modal">
 					<ion-label position="floating">Fecha de nacimiento</ion-label>
 					<ion-input readonly type="text" [value]="form.controls.birthDate.value"></ion-input>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.birthDate.invalid && form.controls.birthDate.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Seleccione una fecha</ion-label>
+				</ion-item>
+
 				<ion-item>
 					<ion-label position="floating">Género</ion-label>
 					<ion-select interface="popover" formControlName="gender">
@@ -44,6 +72,12 @@
 						</ion-select-option>
 					</ion-select>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.gender.invalid && form.controls.gender.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Seleccione una género</ion-label>
+				</ion-item>
 			</ion-list>
 
 			<p class="text-title ion-margin-top ion-no-margin">Configura tu cuenta</p>
@@ -52,33 +86,72 @@
 					<ion-label position="floating">Correo electrónico</ion-label>
 					<ion-input type="email" formControlName="email"></ion-input>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.email.invalid && form.controls.email.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Ingrese un email válido</ion-label>
+				</ion-item>
+
 				<ion-item>
 					<ion-label position="floating">Confirmar correo electrónico</ion-label>
 					<ion-input type="email" formControlName="emailConfirm"></ion-input>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.emailConfirm.invalid && form.controls.emailConfirm.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">
+						<ng-container
+						*ngIf="
+						form.controls.emailConfirm.errors.required ||
+						form.controls.emailConfirm.errors.email
+						else notEqualsEmails">
+							Ingrese un email válido
+						</ng-container>
+						<ng-template #notEqualsEmails>
+							Los emails no coinciden
+						</ng-template>
+					</ion-label>
+				</ion-item>
+
 				<ion-item class="ion-align-items-center">
 					<ion-label position="floating">PIN de seguridad</ion-label>
-					<ion-input
-					[type]="showPin ? 'text' : 'password'"
-					formControlName="pin">
-					</ion-input>
-					<ion-icon
-					slot="end"
-					[name]="showPin ? 'eye-off' : 'eye'"
-					(click)="showPin = !showPin">
-					</ion-icon>
+					<ion-input [type]="showPin ? 'text' : 'password'" formControlName="pin"></ion-input>
+					<ion-icon slot="end" [name]="showPin ? 'eye-off' : 'eye'" (click)="showPin = !showPin"></ion-icon>
 				</ion-item>
+				<ion-item
+				*ngIf="form.controls.pin.invalid && form.controls.pin.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">Ingrese un pin válido (8 carácteres o más)</ion-label>
+				</ion-item>
+
 				<ion-item class="ion-align-items-center">
 					<ion-label position="floating">Confirmar PIN de seguridad</ion-label>
-					<ion-input
-					[type]="showConfirmPin ? 'text' : 'password'"
-					formControlName="confirmPin">
-					</ion-input>
+					<ion-input [type]="showConfirmPin ? 'text' : 'password'" formControlName="confirmPin"></ion-input>
 					<ion-icon
 					slot="end"
 					[name]="showConfirmPin ? 'eye-off' : 'eye'"
 					(click)="showConfirmPin = !showConfirmPin">
 					</ion-icon>
+				</ion-item>
+				<ion-item
+				*ngIf="form.controls.confirmPin.invalid && form.controls.confirmPin.touched"
+				lines="none"
+				class="item-errors ion-margin-bottom">
+					<ion-label color="danger">
+						<ng-container
+						*ngIf="
+						form.controls.confirmPin.errors.required ||
+						form.controls.confirmPin.errors.minlength
+						else notEqualsPins">
+							Ingrese un pin válido (8 carácteres o más)
+						</ng-container>
+						<ng-template #notEqualsPins>
+							Los pins no coinciden
+						</ng-template>
+					</ion-label>
 				</ion-item>
 			</ion-list>
 

@@ -15,6 +15,7 @@ export class RegisterService {
 
 	private phoneNumber: string;
 	private phoneVerified: boolean;
+	private personalInformation: any;
 
 	constructor(private http: HttpClient) { }
 
@@ -96,6 +97,10 @@ export class RegisterService {
 			}, 2000);
 		});
 		// return this.http.get('/signup/genders');
+	}
+
+	setPersonalInformation(body: any) {
+		this.personalInformation = body;
 	}
 
 }
