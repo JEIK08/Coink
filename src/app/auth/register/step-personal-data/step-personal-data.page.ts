@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegisterService } from '../services/register.service';
 
@@ -22,7 +23,9 @@ export class StepPersonalDataPage {
 
 	constructor(
 		private registerService: RegisterService,
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private route: ActivatedRoute
 	) {
 		this.registerService.getDocumentTypes().subscribe(documenTypes => {
 			this.documentTypes = documenTypes;
@@ -71,6 +74,7 @@ export class StepPersonalDataPage {
 			return;
 		}
 		this.registerService.setPersonalInformation(this.form.value);
+		this.router.navigate(['..', 'accept-contract'], { relativeTo: this.route });
 	}
 
 }

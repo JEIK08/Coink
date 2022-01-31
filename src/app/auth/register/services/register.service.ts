@@ -103,4 +103,8 @@ export class RegisterService {
 		this.personalInformation = body;
 	}
 
+	getPersonalInformation() {
+		return this.personalInformation;
+	}
+
 }
