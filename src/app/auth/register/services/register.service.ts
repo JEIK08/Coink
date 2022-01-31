@@ -31,7 +31,7 @@ export class RegisterService {
 	}
 
 	sendVerificationCode(loadingController: LoadingController) {
-		return new Promise<void>((resolve, reject) => {
+		return new Promise<string>((resolve, reject) => {
 			loadingController.create().then(loading => {
 				loading.present();
 				let body = this.cryptoService.encrypt({
@@ -42,7 +42,10 @@ export class RegisterService {
 				this.http.post('/signup/sendSmsVerificationNumber', body).subscribe((data: any) => {
 					resolve(this.cryptoService.decrypt(data.payload).verification_id);
 					loading.dismiss().then();
-				}, reject);
+				}, error => {
+					reject(error);
+					loading.dismiss().then();
+				});
 			});
 		});
 	}
