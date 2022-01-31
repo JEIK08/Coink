@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanLoad, Router } from '@angular/router';
 
 import { RegisterService } from '../../services/register.service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class StepCodeGuardService implements CanActivate {
+export class StepCodeGuardService implements CanLoad {
 
 	constructor(
 		private registerService: RegisterService,
 		private router: Router
 	) { }
 
-	canActivate() {
+	canLoad() {
 		return this.registerService.getPhoneNumner()
 			? true
 			: this.router.createUrlTree(['auth', 'register']);
