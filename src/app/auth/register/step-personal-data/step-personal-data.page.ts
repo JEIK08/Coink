@@ -62,6 +62,9 @@ export class StepPersonalDataPage {
 		this.form.get('pin').valueChanges.subscribe(() => {
 			this.form.get('confirmPin').updateValueAndValidity();
 		});
+
+		const storedInformation: any = this.registerService.getPersonalInformation();
+		if (storedInformation) this.form.reset(storedInformation);
 	}
 
 	selectDate({ detail: { value } }: any, field: string) {
