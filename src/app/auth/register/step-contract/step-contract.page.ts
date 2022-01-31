@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { LoadingController } from '@ionic/angular';
+import { IonModal, LoadingController } from '@ionic/angular';
 
 import { RegisterService } from '../services/register.service';
 
@@ -16,6 +17,7 @@ export class StepContractPage {
 
 	constructor(
 		private registerService: RegisterService,
+		private router: Router,
 		private loadingController: LoadingController
 	) { }
 
@@ -28,6 +30,12 @@ export class StepContractPage {
 				this.showModal = true;
 			});
 		});
+	}
+
+	backToHome(modal: IonModal) {
+		modal.dismiss();
+		this.registerService.clean();
+		this.router.navigate(['']);
 	}
 
 }

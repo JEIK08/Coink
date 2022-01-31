@@ -48,11 +48,16 @@
 	</app-register-layout>
 </ion-content>
 
-<ion-modal [isOpen]="showModal">
+<ion-modal #modal [isOpen]="showModal">
 	<ng-template>
 		<div class="modal-container">
 			<div class="modal-content">
-				Final modal
+				<ion-img src="assets/icons/oink-gift.svg"></ion-img>
+				<p class="text-title">¡Bienvenido a Coink!</p>
+				<p>¡Cuenta creada exitosamente, tu marrano ya está listo para que empieces a ahorrar!</p>
+				<ion-button strong expand="block" shape="round" (click)="backToHome(modal)">
+					CONTINUAR
+				</ion-button>
 			</div>
 		</div>
 	</ng-template>

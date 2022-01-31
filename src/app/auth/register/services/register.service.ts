@@ -127,4 +127,10 @@ export class RegisterService {
 		});
 	}
 
+	clean() {
+		this.phoneNumber = undefined;
+		this.phoneVerified = undefined;
+		this.personalInformation = undefined;
+	}
+
 }
