@@ -26,7 +26,6 @@ export class StepCodePage {
 		private loadingController: LoadingController
 	) {
 		this.phoneNumber = this.registerService.getPhoneNumner();
-		// 0000
 		this.codeControl = this.formBuilder.control('', [
 			Validators.required,
 			Validators.minLength(4)
@@ -48,7 +47,6 @@ export class StepCodePage {
 			this.alertController.create({
 				header: 'CÓDIGO INCORRECTO',
 				message: 'El código que ingresaste es incorrecto, enviaremos un nuevo código a tu correo electrónico.',
-				cssClass: 'code-modal',
 				buttons: [
 					{ text: 'Cancelar' },
 					{

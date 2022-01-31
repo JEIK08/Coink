@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-// import { tap } from 'rxjs/operators';
 
 import { LoadingController } from '@ionic/angular';
+
+import { CryptoService } from './crypto.service';
 
 import { DocumentType } from '../interfaces/document-type';
 import { Gender } from '../interfaces/gender';
@@ -17,7 +17,10 @@ export class RegisterService {
 	private phoneVerified: boolean;
 	private personalInformation: any;
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		private cryptoService: CryptoService
+	) { }
 
 	setPhoneNumber(phoneNumber: string) {
 		this.phoneNumber = phoneNumber;
@@ -28,35 +31,18 @@ export class RegisterService {
 	}
 
 	sendVerificationCode(loadingController: LoadingController) {
-		// const url = environment.API_URL + request.url;
-		// const params = request.params.append('apiKey', environment.API_KEY);
-		// if (request.body) {
-		// 	request = request.clone({
-		// 		url,
-		// 		params,
-		// 		body: { payload: this.cryptoService.encrypt(request.body) }
-		// 	});
-		// } else {
-		// 	request = request.clone({ url, params });
-		// }
-		// .pipe(map(response => {
-		// 	return response.type == HttpEventType.Response
-		// 		? response.clone({ body: this.cryptoService.decrypt(response.body.payload) })
-		// 		: response;
-		// }));
-		return new Promise<void>(resolve => {
-			loadingController.create().then(modal => {
-				modal.present();
-				setTimeout(() => {
-					modal.dismiss().then();
-					resolve();
-				}, 300);
-				// return this.http.post(
-				// 	'/signup/sendSmsVerificationNumber',
-				// 	{ phone_number, log_signup_id: '' }
-				// ).pipe(tap(() => {
-				// 	this.phoneNumber = phone_number;
-				// }));
+		return new Promise<void>((resolve, reject) => {
+			loadingController.create().then(loading => {
+				loading.present();
+				let body = this.cryptoService.encrypt({
+					phone_number: this.phoneNumber,
+					log_signup_id: ''
+				});
+				body = { payload: body };
+				this.http.post('/signup/sendSmsVerificationNumber', body).subscribe((data: any) => {
+					resolve(this.cryptoService.decrypt(data.payload).verification_id);
+					loading.dismiss().then();
+				}, reject);
 			});
 		});
 	}
@@ -70,33 +56,11 @@ export class RegisterService {
 	}
 
 	getDocumentTypes() {
-		return new Observable<DocumentType[]>(observer => {
-			setTimeout(() => {
-				observer.next(
-					[
-						{ id: 1, notation: 'CC' as any, description: 'Cédula de Ciudadanía' },
-						{ id: 2, notation: 'TI' as any, description: 'Tarjeta de Identidad' }
-					]
-				);
-				observer.complete();
-			}, 2000);
-		});
-		// return this.http.get('/signup/documentTypes');
+		return this.http.get<DocumentType[]>('/signup/documentTypes');
 	}
 
 	getGenders() {
-		return new Observable<Gender[]>(observer => {
-			setTimeout(() => {
-				observer.next(
-					[
-						{ id: 1, name: "Masculino", description: "Género Masculino" },
-						{ id: 2, name: "Femenino", description: "Género Femenino" }
-					]
-				);
-				observer.complete();
-			}, 2000);
-		});
-		// return this.http.get('/signup/genders');
+		return this.http.get<Gender[]>('/signup/genders');
 	}
 
 	setPersonalInformation(body: any) {
@@ -114,7 +78,6 @@ export class RegisterService {
 				console.log(
 					'Documento de identidad:',
 					this.personalInformation.documentType,
-					'N°',
 					this.personalInformation.documentNumber
 				);
 				console.log('Fecha de expedición:', this.personalInformation.documentExpedition);
