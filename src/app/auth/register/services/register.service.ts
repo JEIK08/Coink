@@ -107,4 +107,24 @@ export class RegisterService {
 		return this.personalInformation;
 	}
 
+	register() {
+		return new Promise<void>(resolve => {
+			setTimeout(() => {
+				console.log('Teléfono:', this.phoneNumber);
+				console.log(
+					'Documento de identidad:',
+					this.personalInformation.documentType,
+					'N°',
+					this.personalInformation.documentNumber
+				);
+				console.log('Fecha de expedición:', this.personalInformation.documentExpedition);
+				console.log('Fecha de nacimiento:', this.personalInformation.birthDate);
+				console.log('Género:', this.personalInformation.gender);
+				console.log('Email:', this.personalInformation.email);
+				console.log('PIN:', this.personalInformation.pin);
+				resolve();
+			}, 500);
+		});
+	}
+
 }

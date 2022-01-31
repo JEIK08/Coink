@@ -1,0 +1,19 @@
+ion-modal {
+	--background: transparent;
+}
+
+.modal-container {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background-color: white;
+	border-radius: 8px;
+	min-width: 200px;
+	padding: 24px;
+	color: var(--ion-color-primary-contrast);
+}
